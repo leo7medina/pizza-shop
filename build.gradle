@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.3'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+ext {
+	dependenciesManagementPluginVersion         = '1.1.4'
+	springBootVersion                           = '3.2.3'
+	springVersion                               = '5.2.6.RELEASE'
+	gradleLombokVersion 						= '1.18.30'
+
+	pizzaShopVersion 							= '1.0.0-SNAPSHOT'
+}
+
+group = 'ec.com.tio.leo.dev'
+version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '17'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	compileOnly "org.projectlombok:lombok:${gradleLombokVersion}"
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor "org.projectlombok:lombok:${gradleLombokVersion}"
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+}
+
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}
