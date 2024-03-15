@@ -1,4 +1,4 @@
-package ec.com.tio.leo.dev.pizza.shop.controller;
+package ec.com.tio.leo.dev.pizza.shop.web.controller;
 
 import ec.com.tio.leo.dev.pizza.shop.persistence.entity.CustomerEntity;
 import ec.com.tio.leo.dev.pizza.shop.service.CustomerService;
