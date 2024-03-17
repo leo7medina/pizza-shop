@@ -12,7 +12,7 @@ STATUS: FINALIZED
 
 
 ## Dependencies
-- Lomnbok
+- Lombok
 - Spring data jpa
 - Spring web
 - Spring Security
@@ -24,6 +24,6 @@ STATUS: FINALIZED
 ## Mysql with docker
 docker pull mysql
 
-docker volume create mysql-volume
+docker volume create <mysql-volume>
 
 docker run -d -p 3306:3306 -v v_mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=admin --name mysql-container mysql:latest
