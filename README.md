@@ -15,6 +15,8 @@ STATUS: FINALIZED
 - Lomnbok
 - Spring data jpa
 - Spring web
+- Spring Security
+- JWT
 - My sql driver
 
 
