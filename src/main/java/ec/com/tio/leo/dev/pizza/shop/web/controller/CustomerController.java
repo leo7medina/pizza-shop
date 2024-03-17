@@ -17,14 +17,11 @@ import java.util.List;
 @RequestMapping("/api/customers")
 public class CustomerController {
 
-    private final CustomerService customerService;
-    private final OrderService orderService;
+    @Autowired
+    private CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, OrderService orderService) {
-        this.customerService = customerService;
-        this.orderService = orderService;
-    }
+    private OrderService orderService;
 
     @GetMapping("/phone/{phone}")
     public ResponseEntity<CustomerEntity> getByPhone(@PathVariable String phone) {
