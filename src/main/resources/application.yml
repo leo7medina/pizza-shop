@@ -1,10 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /pizzaShopServices
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pizza-shop?createDatabaseIfNotExist=true
-    username: root
-    password: admin
+#    url: jdbc:mysql://localhost:3306/pizza_shop?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/pizza_shop
+    username: admin_pizza_shop
+    password: admin_pizza_shop
   jpa:
-    hibernate:
-      ddl-auto: update
+    # hibernate:
+    #   ddl-auto: update
     show-sql: true
+
+logging:
+  level:
+    root: info
+    org:
+      hibernate: error
+      springframework:
+        security:
+          web: debug
+
+springdoc:
+  api-docs:
+    path: /api/public/v3/api-docs
+  swagger-ui:
+    path: /api/public/swagger-ui.html

@@ -1,4 +1,4 @@
-package ec.com.tio.leo.dev.pizza.shop.controller;
+package ec.com.tio.leo.dev.pizza.shop.web.controller;
 
 import ec.com.tio.leo.dev.pizza.shop.persistence.entity.PizzaEntity;
 import ec.com.tio.leo.dev.pizza.shop.service.PizzaService;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/services")
+@RequestMapping("/api/pizzas")
 public class PizzaController {
 
     @Autowired

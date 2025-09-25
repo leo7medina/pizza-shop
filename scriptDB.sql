@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema pizzeria
+-- Schema pizza_shop
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema pizzeria
+-- Schema pizza_shop
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `pizzeria` DEFAULT CHARACTER SET utf8 ;
-USE `pizzeria` ;
+CREATE SCHEMA IF NOT EXISTS `pizza_shop` DEFAULT CHARACTER SET utf8 ;
+USE `pizza_shop` ;
 
 -- -----------------------------------------------------
--- Table `pizzeria`.`pizza`
+-- Table `pizza_shop`.`pizza`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pizzeria`.`pizza` (
+CREATE TABLE IF NOT EXISTS `pizza_shop`.`pizza` (
                                                   `id_pizza` INT NOT NULL AUTO_INCREMENT,
                                                   `name` VARCHAR(30) NOT NULL,
     `description` VARCHAR(150) NOT NULL,
@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `pizzeria`.`pizza` (
 
 
 -- -----------------------------------------------------
--- Table `pizzeria`.`customer`
+-- Table `pizza_shop`.`customer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pizzeria`.`customer` (
+CREATE TABLE IF NOT EXISTS `pizza_shop`.`customer` (
                                                      `id_customer` VARCHAR(15) NOT NULL,
     `name` VARCHAR(60) NOT NULL,
     `address` VARCHAR(100) NULL,
@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `pizzeria`.`customer` (
 
 
 -- -----------------------------------------------------
--- Table `pizzeria`.`pizza_order`
+-- Table `pizza_shop`.`pizza_order`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pizzeria`.`pizza_order` (
+CREATE TABLE IF NOT EXISTS `pizza_shop`.`pizza_order` (
                                                         `id_order` INT NOT NULL AUTO_INCREMENT,
                                                         `id_customer` VARCHAR(15) NOT NULL,
     `date` DATETIME NOT NULL,
@@ -61,16 +61,16 @@ CREATE TABLE IF NOT EXISTS `pizzeria`.`pizza_order` (
     INDEX `fk_ORDER_CUSTOMER1_idx` (`id_customer` ASC) VISIBLE,
     CONSTRAINT `fk_ORDER_CUSTOMER1`
     FOREIGN KEY (`id_customer`)
-    REFERENCES `pizzeria`.`customer` (`id_customer`)
+    REFERENCES `pizza_shop`.`customer` (`id_customer`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pizzeria`.`order_item`
+-- Table `pizza_shop`.`order_item`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pizzeria`.`order_item` (
+CREATE TABLE IF NOT EXISTS `pizza_shop`.`order_item` (
                                                        `id_item` INT NOT NULL AUTO_INCREMENT,
                                                        `id_order` INT NOT NULL,
                                                        `id_pizza` INT NOT NULL,
@@ -81,22 +81,22 @@ CREATE TABLE IF NOT EXISTS `pizzeria`.`order_item` (
     INDEX `fk_ORDER_ITEM_PIZZA1_idx` (`id_pizza` ASC) VISIBLE,
     CONSTRAINT `fk_ORDER_ITEM_ORDER`
     FOREIGN KEY (`id_order`)
-    REFERENCES `pizzeria`.`pizza_order` (`id_order`)
+    REFERENCES `pizza_shop`.`pizza_order` (`id_order`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_ORDER_ITEM_PIZZA1`
     FOREIGN KEY (`id_pizza`)
-    REFERENCES `pizzeria`.`pizza` (`id_pizza`)
+    REFERENCES `pizza_shop`.`pizza` (`id_pizza`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `pizzeria`.`user`
+-- Table `pizza_shop`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pizzeria`.`user` (
-                                                 `username` VARCHAR(20) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pizza_shop`.`user` (
+    `username` VARCHAR(20) NOT NULL,
     `password` VARCHAR(200) NOT NULL,
     `email` VARCHAR(50) NULL,
     `locked` TINYINT NOT NULL,
@@ -106,16 +106,16 @@ CREATE TABLE IF NOT EXISTS `pizzeria`.`user` (
 
 
 -- -----------------------------------------------------
--- Table `pizzeria`.`user_role`
+-- Table `pizza_shop`.`user_role`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pizzeria`.`user_role` (
+CREATE TABLE IF NOT EXISTS `pizza_shop`.`user_role` (
                                                       `username` VARCHAR(20) NOT NULL,
     `role` VARCHAR(20) NOT NULL COMMENT 'CUSTOMER\nADMIN',
     `granted_date` DATETIME NOT NULL,
     PRIMARY KEY (`username`, `role`),
     CONSTRAINT `fk_user_role_user1`
     FOREIGN KEY (`username`)
-    REFERENCES `pizzeria`.`user` (`username`)
+    REFERENCES `pizza_shop`.`user` (`username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;

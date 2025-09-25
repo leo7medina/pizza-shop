@@ -1,5 +1,4 @@
--- INSERT CUSTOMERS
-INSERT INTO customer (id_customer, name, address, email, phone_number)
+INSERT INTO `pizza_shop`.customer (id_customer, name, address, email, phone_number)
 VALUES
     ('863264988','Drake Theory','P.O. Box 136, 4534 Lacinia St.','draketheory@hotmail.com','(826) 607-2278'),
     ('617684636','Alexa Morgan','Ap #732-8087 Dui. Road','aleximorgan@hotmail.com','(830) 212-2247'),
@@ -18,7 +17,7 @@ VALUES
     ('303265780','Shelton Owens','Ap #206-5413 Vivamus St.','figthowens@platzi.com','(821) 880-6661');
 
 -- INSERT PIZZAS
-INSERT INTO pizza (id_pizza, name, description, price, vegetarian, vegan, available)
+INSERT INTO `pizza_shop`.pizza (id_pizza, name, description, price, vegetarian, vegan, available)
 VALUES
     (1,'Pepperoni', 'Pepperoni, Homemade Tomato Sauce & Mozzarella.', 23.0, FALSE, FALSE, TRUE),
     (2,'Margherita', 'Fior de Latte, Homemade Tomato Sauce, Extra Virgin Olive Oil & Basil.', 18.5, TRUE, FALSE, TRUE),
@@ -34,17 +33,17 @@ VALUES
     (12,'Spinach Artichoke', 'Fresh Spinach, Marinated Artichoke Hearts, Garlic, Fior de Latte, Mozzarella & Parmesan.', 18.95, TRUE, FALSE, TRUE);
 
 -- INSERT ORDERS
-INSERT INTO pizza_order (id_order, id_customer, date, total, method, additional_notes)
+INSERT INTO `pizza_shop`.pizza_order (id_order, id_customer, date, total, method, additional_notes)
 VALUES
-    (1, '192758012', NOW() - INTERVAL '5 DAY', 42.95, 'D', 'Don''t be late pls.'),
-    (2, '474771564', NOW() - INTERVAL '4 DAY', 62.0, 'S', null),
-    (3, '182120056', NOW() - INTERVAL '3 DAY', 22.0, 'C', null),
-    (4, '617684636', NOW() - INTERVAL '2 DAY', 42.0, 'S', null),
-    (5, '192758012', NOW() - INTERVAL '1 DAY', 20.5, 'D', 'Please bring the jalapeños separately.'),
+    (1, '192758012', NOW() - INTERVAL 5 DAY, 42.95, 'D', 'Don''t be late pls.'),
+    (2, '474771564', NOW() - INTERVAL 4 DAY, 62.0, 'S', null),
+    (3, '182120056', NOW() - INTERVAL 3 DAY, 22.0, 'C', null),
+    (4, '617684636', NOW() - INTERVAL 2 DAY, 42.0, 'S', null),
+    (5, '192758012', NOW() - INTERVAL 1 DAY, 20.5, 'D', 'Please bring the jalapeños separately.'),
     (6, '782668115', NOW(), 23, 'D', null);
 
 -- INSERT ORDER ITEMS
-INSERT INTO order_item (id_order, id_item, id_pizza, quantity, price)
+INSERT INTO `pizza_shop`.order_item (id_order, id_item, id_pizza, quantity, price)
 VALUES
     (1, 1, 1, 1, 23.0),
     (1, 2, 4, 1, 19.95),
@@ -56,3 +55,22 @@ VALUES
     (5, 1, 10, 0.5, 11.0),
     (5, 2, 12, 0.5, 9.5),
     (6, 1, 11, 1, 23);
+
+
+-- INSERT USERS
+--- admin123456
+INSERT INTO pizza_shop.`user`
+(username, password, email, locked, disabled)
+VALUES('admin', '$2y$10$MZztuEUEiuKv7JZUlcB2KOJUetiez.8/EgDMaHt/EYZaDhATqTQ9S', 'admin@gmail.com', 0, 0);
+
+INSERT INTO pizza_shop.`user`
+(username, password, email, locked, disabled)
+VALUES('customer', 'customer123456', 'customer@gmail.com', 0, 0);
+
+
+-- INSERT USER ROLES
+INSERT INTO pizza_shop.user_role
+(username, `role`, granted_date)
+VALUES
+	('admin', 'ADMIN', NOW()),
+	('customer', 'CUSTOMER', NOW());
