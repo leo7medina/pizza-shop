@@ -1,6 +1,5 @@
 package ec.com.tio.leo.dev.pizza.shop.web.config;
 
-import ch.qos.logback.core.util.TimeUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;

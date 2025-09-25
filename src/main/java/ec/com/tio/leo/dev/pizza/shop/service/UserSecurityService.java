@@ -54,7 +54,7 @@ public class UserSecurityService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.length);
 
         for (String role : roles) {
-            authorities.add(new SimpleGrantedAuthority("ROLE" + role));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
 
             for (String authority: this.getAuthorities(role)) {
                 authorities.add(new SimpleGrantedAuthority(authority));

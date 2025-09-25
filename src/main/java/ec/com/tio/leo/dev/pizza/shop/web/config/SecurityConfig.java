@@ -24,14 +24,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-//    private final JwtFilter jwtFilter;
-    @Autowired
-    private JwtFilter jwtFilter;
-
+    private final JwtFilter jwtFilter;
 //    @Autowired
-//    public SecurityConfig(JwtFilter jwtFilter) {
-//        this.jwtFilter = jwtFilter;
-//    }
+//    private JwtFilter jwtFilter;
+
+    @Autowired
+    public SecurityConfig(JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,6 +39,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement( session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(customizeRequest -> customizeRequest
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/api/customers/**").hasAnyRole("ADMIN", "CUSTOMER")
                         .requestMatchers(HttpMethod.GET, "/api/pizzas/**").hasAnyRole("ADMIN", "CUSTOMER")
                         .requestMatchers(HttpMethod.POST, "/api/pizzas/**").hasRole("ADMIN")
@@ -55,14 +57,14 @@ public class SecurityConfig {
 //    @Bean
 //    public UserDetailsService memoryUses() {
 //        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("admin"))
+//                .username("adminleo")
+//                .password(passwordEncoder().encode("adminleo"))
 //                .roles("ADMIN")
 //                .build();
 //
 //        UserDetails customer = User.builder()
-//                .username("customer")
-//                .password(passwordEncoder().encode("customer123"))
+//                .username("customerleo")
+//                .password(passwordEncoder().encode("customerleo"))
 //                .roles("CUSTOMER")
 //                .build();
 //        return new InMemoryUserDetailsManager(admin, customer);
